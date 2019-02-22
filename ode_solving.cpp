@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <boost/numeric/odeint.hpp>
+#include <boost/array.hpp>
 using namespace boost::numeric::odeint;
 using namespace std;
 
@@ -30,8 +31,23 @@ double S = S0; // number of regular people who can't kill zombies
 double K = K0; // number of people who can kill zombeis
 double Z = Z0; // number of zombies
 
-void rhs(const double x, double &dxdt, const double t) { 
-  dxdt = 3.0/(2.0*t*t) + x/(2.0*t);
+
+const double sigma = 10.0;
+const double R = 28.0;
+const double b = 8.0 / 3.0;
+
+typedef boost::array< double , 3 > state_type;
+
+void write_lorenz( const state_type &x , const double t )
+{
+    cout << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << endl;
+}
+
+void lorenz( const state_type &x , state_type &dxdt , double t )
+{
+    dxdt[0] = sigma * ( x[1] - x[0] );
+    dxdt[1] = R * x[0] - x[1] - x[0] * x[2];
+    dxdt[2] = -b * x[2] + x[0] * x[1];
 }
 
 void write_cout(const double &x, const double t) { 
@@ -41,8 +57,8 @@ void write_cout(const double &x, const double t) {
 typedef runge_kutta_dopri5 <double > stepper_type;
 
 int main() { 
-  double x = 0.0;
+  state_type x = { 10.0 , 1.0 , 1.0 }; // initial conditions
   
   integrate_adaptive(
-      make_controlled(1E-6, 1E-6, stepper_type()), rhs, x, 1.0, 10.0, 0.1, write_cout);
+      make_controlled(1E-6, 1E-6, stepper_type()), rhs, x,  0.0, 25.0 , 0.1, write_cout);
 }
