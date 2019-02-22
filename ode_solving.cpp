@@ -24,11 +24,12 @@ const double B = 0.02;  // rate at which regular people are turned into Z
 const double C = 0.03;  // rate as which zombie killers are turned into Zombies
 const double E = 0.015; // rate at which zombie killers teach regular people how to kill zombies
 const double K0 = 9; // number of people who can kill zombies
-double Z0 = 100; // number of zombies: will be varying this value
+double Z0 = 1; // number of zombies: will be varying this value
 double S0 = 491 - Z0; // number of regular people who can't kill zombies
 
 
 typedef boost::array< double , 3 > state_type;
+typedef runge_kutta_dopri5< double > stepper_type;
 
 void print( const state_type &x , const double t )
 {
@@ -47,5 +48,5 @@ void zombie_odes( const state_type &x , state_type &dxdt , double t )
 int main() { 
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
-  integrate( zombie_odes , x , 0.0 , 10.0 , 0.0001 , print );
+  integrate_adaptive(make_controlled(1E-12, 1E-12, stepper_type()), zombie_odes , x , 0.0 , 10.0 , 0.01 , print);
 }
