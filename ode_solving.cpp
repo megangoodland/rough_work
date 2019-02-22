@@ -2,7 +2,8 @@
 // Analytic solution is x(t) = sqrt(t) - 1/t 
 
 #include <iostream>
-#include <boost/numeric/odeint.hpp> using namespace boost::numeric::odeint;
+#include <boost/numeric/odeint.hpp>
+using namespace boost::numeric::odeint;
 
 void rhs(const double x, double &dxdt, const double t) { 
   dxdt = 3.0/(2.0*t*t) + x/(2.0*t);
