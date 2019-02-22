@@ -60,5 +60,5 @@ int main() {
   state_type x = { 10.0 , 1.0 , 1.0 }; // initial conditions
   
   integrate_adaptive(
-      make_controlled(1E-6, 1E-6, stepper_type()), lorentz, x,  0.0, 25.0 , 0.1, write_cout);
+      make_controlled(1E-6, 1E-6, stepper_type()), lorenz, x,  0.0, 25.0 , 0.1, write_cout);
 }
