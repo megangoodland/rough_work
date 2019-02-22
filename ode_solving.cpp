@@ -47,5 +47,5 @@ void zombie_odes( const state_type &x , state_type &dxdt , double t )
 int main() { 
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
-  integrate( zombie_odes , x , 0.0 , 10 , 0.00001 , print );
+  integrate( zombie_odes , x , 0.0 , 10.0 , 0.0001 , print );
 }
