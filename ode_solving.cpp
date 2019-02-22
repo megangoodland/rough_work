@@ -38,19 +38,14 @@ void print( const state_type &x , const double t )
 // x = ( S, K, Z )
 void zombie_odes( const state_type &x , state_type &dxdt , double t )
 {
-    dxdt[0] = -(B*x[0]*x[2])-(E*x[0]*x[2]);
+    dxdt[0] = -(B*x[0]*x[2])-(E*x[0]*x[1]);
     dxdt[1] = -(C*x[1]*x[2])+(E*x[0]*x[1]);
     dxdt[2] = -(B*x[0]*x[2])+(C*x[1]*x[2])-(A*x[1]*x[2]);
 }
 
-void write_cout(const double &x, const double t) { 
-  cout << t << "\t" << x << endl;
-}
-
-//typedef runge_kutta_dopri5 <double > stepper_type;
 
 int main() { 
-  state_type x = { S0 , K0 , Z0}; // initial conditions
+  state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
   integrate( zombie_odes , x , 0.0 , 25.0 , 0.1 , print );
 }
