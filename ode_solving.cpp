@@ -29,7 +29,7 @@ double S0 = 491 - Z0; // number of regular people who can't kill zombies
 
 
 typedef boost::array< double , 3 > state_type;
-typedef runge_kutta_dopri5< double > stepper_type;
+
 
 void print( const state_type &x , const double t )
 {
@@ -48,5 +48,5 @@ void zombie_odes( const state_type &x , state_type &dxdt , double t )
 int main() { 
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
-  integrate_adaptive(make_controlled(1E-12, 1E-12, stepper_type()), zombie_odes , x , 0.0 , 10.0 , 0.01 , print);
+   integrate(zombie_odes , x , 0.0 , 10.0 , 0.01 , print);
 }
