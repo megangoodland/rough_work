@@ -58,7 +58,5 @@ typedef runge_kutta_dopri5 <double > stepper_type;
 
 int main() { 
   state_type x = { 10.0 , 1.0 , 1.0 }; // initial conditions
-  
-  integrate_adaptive(
-      make_controlled(1E-6, 1E-6, stepper_type()), lorenz, x,  0.0, 25.0 , 0.1, write_cout);
+  integrate( lorenz , x , 0.0 , 25.0 , 0.1 , write_lorenz );
 }
