@@ -10,13 +10,14 @@ void rhs(const double x, double &dxdt, const double t) {
 }
 
 void write_cout(const double &x, const double t) { 
-  std::cout << t << ’\t’ << x << std::endl;
+  std::cout << t << "\t" << x << std::endl;
 }
 
 typedef runge_kutta_dopri5 <double > stepper_type;
 
 int main() { 
   double x = 0.0;
+  
   integrate_adaptive(
       make_controlled(1E-6, 1E-6, stepper_type()), rhs, x, 1.0, 10.0, 0.1, write_cout);
 }
