@@ -26,14 +26,17 @@ const double E = 0.015; // rate at which zombie killers teach regular people how
 const double K0 = 9; // number of people who can kill zombies
 double Z0 = 263; // number of zombies: will be varying this value
 double S0 = 491 - Z0; // number of regular people who can't kill zombies
+double num = 50; // number of steps to perform
 
 
 typedef boost::array< double , 3 > state_type;
 
 
+
 void print( const state_type &x , const double t )
 {
     cout << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << endl;
+    
 }
 
 // x = ( S, K, Z )
@@ -49,6 +52,6 @@ int main() {
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
   int n; //n is the number of steps performed
-  n = integrate(zombie_odes , x , 0.0 , 49.0 , 0.01 , print);
+  n = integrate(zombie_odes , x , 0.0 , num , 0.01 , print);
   cout << n << endl;
 }
