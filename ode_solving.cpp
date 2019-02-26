@@ -41,12 +41,12 @@ typedef boost::array<double, 3> state_type;
     
 // defining 3D array to hold data history
 // dimensions: tSKZ, time, 2 saves
-rarray<double,3> history(4,num,2);
+rarray<double,3> history(4,num+1,2);
 
 // saves data in array
 void add_to_array(const state_type &x , const double t){
     //cout << i << '\t' << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << endl; 
-    history[0][i][1] = t; history[1][i][1] = x[0]; history[2][i][1] = x[1]; history[3][i][1] = x[2]; 
+    history[0][i][0] = t; history[1][i][0] = x[0]; history[2][i][0] = x[1]; history[3][i][0] = x[2]; 
     i = i+1; // increment
 }
 
@@ -65,5 +65,6 @@ int main() {
   // integrate needs (system, x0, t0, t1, dt, observer)
   int n; //n is the number of steps performed
   n = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
+  cout << history << endl;
   cout << n << endl;
 }
