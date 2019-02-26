@@ -34,30 +34,29 @@ const double K0 = 9; // number of people who can kill zombies
 int i = 0; // counter for integrate steps
 int saves = 0; // counter for number of saves
 double num = 50; // max time
+int max_observes = 200; // max number of observes we're doing
 
 // defining boost array to hold x = ( S, K, Z )
 typedef boost::array<double, 3> state_type;
     
 // defining 3D array to hold data history
-// dimensions: tSKZ, time, 2 saves
-rarray<double,3> history(4,num+1,2);
+// dimensions: tSKZ, max 200 observes, 2 saves
+rarray<double,3> history(4, max_observes, 2);
 
 // saves data in array
 void add_to_array(const state_type &x , const double t){
    // cout << i << '\t' << saves << '\t' << num << endl;
-    cout << i << '\t' << t << '\t' << x[0] << '\t' << x[1]<< '\t'<< x[2]<<endl;
-    //history[0][i][saves] = t; history[1][i][saves] = x[0]; history[2][i][saves] = x[1]; history[3][i][saves] = x[2]; 
+   // cout << i << '\t' << t << '\t' << x[0] << '\t' << x[1]<< '\t'<< x[2]<<endl;
+    history[0][i][saves] = t; history[1][i][saves] = x[0]; history[2][i][saves] = x[1]; history[3][i][saves] = x[2]; 
     i = i+1; // increment
 }
 
-void observe(const state_type &x , const double t){
-    
-}
+
 
 void print_array(rarray<double,3>& print){
-    int len0 = print.extent(0); int len1 = print.extent(1); int len2 = print.extent(2);
+    int len1 = print.extent(1);
         for (int y = 0; y < len1; y++) {
-            cout << print[0][y][0] << '\t' << print[1][y][0] << '\t' << print[2][y][0] << '\t' << print[3][y][0] << endl;
+            cout << print[0][y][saves] << '\t' << print[1][y][saves] << '\t' << print[2][y][saves] << '\t' << print[3][y][saves] << endl;
         }
 }
 
@@ -74,25 +73,9 @@ int main() {
   double Z0 = 16; // number of zombies: will be varying this value
   double S0 = 491 - Z0; // number of regular people who can't kill zombies
   state_type x = {S0, K0, Z0}; // initial conditions
-  // integrate needs (system, x0, t0, t1, dt, observer)
-  int n1;
-  // perform the integration once to find out how many steps were taken
-  n1 = integrate(zombie_odes , x , 0.0 , num , 0.01);
-  cout << endl;
-  cout << n1 << endl;
-  cout << endl;
-  cout << endl;
     
-  x = {S0, K0, Z0}; // initial conditions
-  // perform the integration again, now saving the history to an array
   n1 = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-  cout << endl;
-  cout << n1 << endl;
-  cout << endl;
-  cout << endl;
-    
-  
-  //print_array(history);
+  print_array(history);
   
   Z0 = 263; // new number of zombies 5
   S0 = 491 - Z0; // number of regular people who can't kill zombies
@@ -100,7 +83,6 @@ int main() {
   i = 0; // reset counter for integrate steps
   saves = 1; // counter for number of saves
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-
-  //print_array(history);
+  print_array(history);
   
 }
