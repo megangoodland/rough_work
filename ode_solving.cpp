@@ -74,7 +74,7 @@ int main() {
   double S0 = 491 - Z0; // number of regular people who can't kill zombies
   state_type x = {S0, K0, Z0}; // initial conditions
     
-  n1 = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
+  integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
   print_array(history);
   
   Z0 = 263; // new number of zombies 5
