@@ -45,7 +45,7 @@ rarray<double,3> history(4,num+1,2);
 // saves data in array
 void add_to_array(const state_type &x , const double t){
    // cout << i << '\t' << saves << '\t' << num << endl;
-    cout << t << '\t' << x[0] << '\t' << x[1]<< x[2]<<endl;
+    cout << t << '\t' << x[0] << '\t' << x[1]<< <<'\t'<< x[2]<<endl;
     history[0][i][saves] = t; history[1][i][saves] = x[0]; history[2][i][saves] = x[1]; history[3][i][saves] = x[2]; 
     i = i+1; // increment
 }
@@ -80,6 +80,6 @@ int main() {
   i = 0; // reset counter for integrate steps
   saves = 1; // counter for number of saves
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-  print_array(history);
+  //print_array(history);
   
 }
