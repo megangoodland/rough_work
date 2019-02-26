@@ -49,19 +49,14 @@ void add_to_array(const state_type &x , const double t){
 
 
 
-//void print_array(rarray<double,3>& print){
-//    int len1 = print.extent(1);
-//        for (int y = 0; y < len1; y++) {
-//            cout << print[0][y][saves] << '\t' << print[1][y][saves] << '\t' << print[2][y][saves] << '\t' << print[3][y][saves] << endl;
-//        }
-//}
-
 int netCDF_write(rarray<double,3>& array_to_print) {
+   // Finding the length of each dimension
    int nx = array_to_print.extent(0);
    int ny = array_to_print.extent(1);
    int nz = array_to_print.extent(2);
-   double dataOut[nx][ny][nz];
-
+   double dataOut[nx][ny][nz]; // Place to hold data
+    
+   // Copy data
    for(int x = 0; x < nx; x++){
         for(int y = 0; y < ny; y++){
              for(int z = 0; z < nz; z++){
@@ -69,7 +64,7 @@ int netCDF_write(rarray<double,3>& array_to_print) {
              }
         }  
    }
-         
+    
    // Create the netCDF file.
    NcFile dataFile("output.nc", NcFile::replace);
    // Create the three dimensions.
@@ -105,18 +100,16 @@ int netCDF_read() {
     int ny = yDim.getSize(); 
     int nz = zDim.getSize(); 
 
-    std::cout << "Our matrix is " << nx << " by " << ny << std::endl;
-    //int **p = new int *[nx];
-    //p[0] = new int[nx * ny];
-    //for(int i = 0; i < nx; i++)
-    //  p[i] = &p[0][i * ny];
-      
     // Retrieve the variable named "data"
     NcVar data = dataFile.getVar("data");
     // Put the data in a var.
     double dataOut[nx][ny][nz];
     data.getVar(&dataOut);
     for(int z=0; z<nz; z++){
+        if(z==0){
+            cout << 'This is the first case: with 16 initial zombies, they lose' << endl;}
+        else{
+            cout << 'This is the first case: with 263 initial zombies, they win' << endl;}
         for (int y = 0; y < ny; y++) {
             cout << dataOut[0][y][z] << '\t' << dataOut[1][y][z] << '\t' << dataOut[2][y][z] << '\t' << dataOut[3][y][z] << endl;
         }
@@ -140,10 +133,8 @@ int main() {
   double Z0 = 16; // number of zombies: will be varying this value
   double S0 = 491 - Z0; // number of regular people who can't kill zombies
   state_type x = {S0, K0, Z0}; // initial conditions
-    
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-//  print_array(history);
-  
+
   i = 0; // resetting integration steps
   Z0 = 263; // new number of zombies 5
   S0 = 491 - Z0; // number of regular people who can't kill zombies
@@ -151,7 +142,6 @@ int main() {
   saves = 1; // counter for number of saves
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
     
-//  print_array(history);
   netCDF_write(history);
   netCDF_read();
   
