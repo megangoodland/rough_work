@@ -67,14 +67,14 @@ void zombie_odes( const state_type &x , state_type &dxdt , double t ){
 
 
 int main() { 
-  double Z0 = 263; // number of zombies: will be varying this value
+  double Z0 = 5; // number of zombies: will be varying this value 263
   double S0 = 491 - Z0; // number of regular people who can't kill zombies
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-  print_array(history);
+  //print_array(history);
   
-  Z0 = 5; // new number of zombies:
+  Z0 = 263; // new number of zombies 5
   S0 = 491 - Z0; // number of regular people who can't kill zombies
   x = {S0, K0, Z0}; // new initial conditions
   i = 0; // reset counter for integrate steps
