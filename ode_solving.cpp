@@ -50,6 +50,12 @@ void add_to_array(const state_type &x , const double t){
     i = i+1; // increment
 }
 
+void print_array(rarray<double,3>& print){
+    int len0 = print.extent(0); int len1 = print.extent(1); int len2 = print.extent(2);
+        for (int y = 0; y < len1; y++) {
+            cout << print[0][y][0] << '\t' << print[1][y][0] << '\t' << print[2][y][0] << '\t' << print[3][y][0] << endl;
+        }
+}
 
 
 // x = ( S, K, Z )
@@ -65,6 +71,6 @@ int main() {
   // integrate needs (system, x0, t0, t1, dt, observer)
   int n; //n is the number of steps performed
   n = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-  cout << history << endl;
+  print_array(history);
   cout << n << endl;
 }
