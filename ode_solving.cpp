@@ -106,10 +106,12 @@ int netCDF_read() {
     double dataOut[nx][ny][nz];
     data.getVar(&dataOut);
     for(int z=0; z<nz; z++){
-        if(z==0){
-            cout << 'This is the first case: with 16 initial zombies, they lose' << endl;}
+        if(z<1){
+            cout << "With 16 initial zombies, they lose" << endl;
+        }
         else{
-            cout << 'This is the first case: with 263 initial zombies, they win' << endl;}
+            cout << "With 263 initial zombies, they win" << endl;
+        }
         for (int y = 0; y < ny; y++) {
             cout << dataOut[0][y][z] << '\t' << dataOut[1][y][z] << '\t' << dataOut[2][y][z] << '\t' << dataOut[3][y][z] << endl;
         }
