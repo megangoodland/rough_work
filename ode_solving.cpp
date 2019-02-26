@@ -31,7 +31,6 @@ const double B = 0.02;  // rate at which regular people are turned into Z
 const double C = 0.01;  // rate as which zombie killers are turned into Zombies
 const double E = 0.015; // rate at which zombie killers teach regular people how to kill zombies
 const double K0 = 9; // number of people who can kill zombies
-int i = 0; // counter for integrate steps
 int saves = 0; // counter for number of saves
 double num = 50; // max time
 int max_observes = 200; // max number of observes we're doing
@@ -45,20 +44,17 @@ rarray<double,3> history(4, max_observes, 2);
 
 // saves data in array
 void add_to_array(const state_type &x , const double t){
-   // cout << i << '\t' << saves << '\t' << num << endl;
-   // cout << i << '\t' << t << '\t' << x[0] << '\t' << x[1]<< '\t'<< x[2]<<endl;
     history[0][i][saves] = t; history[1][i][saves] = x[0]; history[2][i][saves] = x[1]; history[3][i][saves] = x[2]; 
-    i = i+1; // increment
 }
 
 
 
-void print_array(rarray<double,3>& print){
-    int len1 = print.extent(1);
-        for (int y = 0; y < len1; y++) {
-            cout << print[0][y][saves] << '\t' << print[1][y][saves] << '\t' << print[2][y][saves] << '\t' << print[3][y][saves] << endl;
-        }
-}
+//void print_array(rarray<double,3>& print){
+//    int len1 = print.extent(1);
+//        for (int y = 0; y < len1; y++) {
+//            cout << print[0][y][saves] << '\t' << print[1][y][saves] << '\t' << print[2][y][saves] << '\t' << print[3][y][saves] << endl;
+//        }
+//}
 
 
 // x = ( S, K, Z )
@@ -75,14 +71,13 @@ int main() {
   state_type x = {S0, K0, Z0}; // initial conditions
     
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-  print_array(history);
+//  print_array(history);
   
   Z0 = 263; // new number of zombies 5
   S0 = 491 - Z0; // number of regular people who can't kill zombies
   x = {S0, K0, Z0}; // new initial conditions
-  i = 0; // reset counter for integrate steps
   saves = 1; // counter for number of saves
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-  print_array(history);
+//  print_array(history);
   
 }
