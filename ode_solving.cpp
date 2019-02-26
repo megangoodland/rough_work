@@ -31,10 +31,8 @@ const double B = 0.02;  // rate at which regular people are turned into Z
 const double C = 0.01;  // rate as which zombie killers are turned into Zombies
 const double E = 0.015; // rate at which zombie killers teach regular people how to kill zombies
 const double K0 = 9; // number of people who can kill zombies
-double Z0 = 263; // number of zombies: will be varying this value
-double S0 = 491 - Z0; // number of regular people who can't kill zombies
-double num = 50; // number of steps to perform
-int i = 0;
+int i = 0; // counter for integrate steps
+int saves = 0; // counter for number of saves
 
 // defining boost array to hold x = ( S, K, Z )
 typedef boost::array<double, 3> state_type;
@@ -46,7 +44,7 @@ rarray<double,3> history(4,num+1,2);
 // saves data in array
 void add_to_array(const state_type &x , const double t){
     //cout << i << '\t' << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << endl; 
-    history[0][i][0] = t; history[1][i][0] = x[0]; history[2][i][0] = x[1]; history[3][i][0] = x[2]; 
+    history[0][i][saves] = t; history[1][i][saves] = x[0]; history[2][i][saves] = x[1]; history[3][i][saves] = x[2]; 
     i = i+1; // increment
 }
 
@@ -67,10 +65,21 @@ void zombie_odes( const state_type &x , state_type &dxdt , double t ){
 
 
 int main() { 
+  double Z0 = 263; // number of zombies: will be varying this value
+  double S0 = 491 - Z0; // number of regular people who can't kill zombies
+  double num = 50; // number of steps to perform
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
-  int n; //n is the number of steps performed
-  n = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
+  integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
   print_array(history);
+  
+  Z0 = 5; // new number of zombies:
+  S0 = 491 - Z0; // number of regular people who can't kill zombies
+  x = {S0, K0, Z0}; // new initial conditions
+  i = 0; // reset counter for integrate steps
+  saves = 1; // counter for number of saves
+  integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
+  print_array(history);
+  
   cout << n << endl;
 }
