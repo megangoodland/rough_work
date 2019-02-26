@@ -45,7 +45,7 @@ rarray<double,3> history(4,num,2);
 
 // saves data in array
 void add_to_array(const state_type &x , const double t){
-    i = i++; // increment
+    i = i+1; // increment
     cout << i << '\t' << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << endl; 
 
 }
