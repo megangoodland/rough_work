@@ -56,7 +56,7 @@ void add_to_array(const state_type &x , const double t){
 //        }
 //}
 
-int netCDF_write(rarray<int,3>& array_to_print) {
+int netCDF_write(rarray<double,3>& array_to_print) {
    int nx = array_to_print.extent(0);
    int ny = array_to_print.extent(1);
    int nz = array_to_print.extent(2);
