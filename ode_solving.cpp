@@ -86,11 +86,6 @@ int netCDF_write(rarray<double,3>& array_to_print) {
    NcVar data = dataFile.addVar("data", ncDouble, dims);
    // Put the data in the file.
    data.putVar(&dataOut); // writing all the data in one operation
-
-   s = 0; // starting at saves = 0
-   for (int y = 0; y < len1; y++) {
-        cout << print[0][y][saves] << '\t' << print[1][y][saves] << '\t' << print[2][y][saves] << '\t' << print[3][y][saves] << endl;
-   }
     
    // add an attribute
    dataFile.putAtt("Creation date:", "26 Feb 2019");
