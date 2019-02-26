@@ -25,15 +25,15 @@ using namespace std;
 // function here
     
 // Create the file.
-NcFile dataFile("pres_temp_4D.nc", NcFile::Replace);
+//NcFile dataFile("pres_temp_4D.nc", NcFile::Replace);
 // Define dimensions
 // One dimension for the S K Z data
 // One dimension for time
 // One dimension for the two result sets
-NcDim *lvlDim, *latDim, *lonDim, *recDim;
-latDim = dataFile.add_dim("latitude", NLAT);
-lonDim = dataFile.add_dim("longitude", NLON);
-recDim = dataFile.add_dim("time"); //this is an unlimited dimension
+//NcDim *lvlDim, *latDim, *lonDim, *recDim;
+//latDim = dataFile.add_dim("latitude", NLAT);
+//lonDim = dataFile.add_dim("longitude", NLON);
+//recDim = dataFile.add_dim("time"); //this is an unlimited dimension
 
 // defining constants and initial conditions
 const double A = 0.03;  // rate at which zombies are killed by K
