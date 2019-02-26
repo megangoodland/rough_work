@@ -83,7 +83,7 @@ int main() {
   cout << endl;
   cout << endl;
     
-  state_type x = {S0, K0, Z0}; // initial conditions
+  x = {S0, K0, Z0}; // initial conditions
   // perform the integration again, now saving the history to an array
   n1 = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
   cout << endl;
