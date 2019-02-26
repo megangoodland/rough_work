@@ -50,6 +50,10 @@ void add_to_array(const state_type &x , const double t){
     i = i+1; // increment
 }
 
+void observe(const state_type &x , const double t){
+    
+}
+
 void print_array(rarray<double,3>& print){
     int len0 = print.extent(0); int len1 = print.extent(1); int len2 = print.extent(2);
         for (int y = 0; y < len1; y++) {
@@ -78,12 +82,15 @@ int main() {
   cout << n1 << endl;
   cout << endl;
   cout << endl;
+    
+  state_type x = {S0, K0, Z0}; // initial conditions
   // perform the integration again, now saving the history to an array
   n1 = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
   cout << endl;
   cout << n1 << endl;
   cout << endl;
   cout << endl;
+    
   
   //print_array(history);
   
