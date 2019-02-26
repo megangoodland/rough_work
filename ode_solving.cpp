@@ -78,6 +78,7 @@ int main() {
   x = {S0, K0, Z0}; // new initial conditions
   i = 0; // reset counter for integrate steps
   saves = 1; // counter for number of saves
+  cout << saves << endl;
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
   print_array(history);
   
