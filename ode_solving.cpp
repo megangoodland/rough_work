@@ -86,7 +86,13 @@ int netCDF_write(rarray<double,3>& array_to_print) {
    NcVar data = dataFile.addVar("data", ncDouble, dims);
    // Put the data in the file.
    data.putVar(&dataOut); // writing all the data in one operation
-   // Add an attribute.
+
+   s = 0; // starting at saves = 0
+   for (int y = 0; y < len1; y++) {
+        cout << print[0][y][saves] << '\t' << print[1][y][saves] << '\t' << print[2][y][saves] << '\t' << print[3][y][saves] << endl;
+   }
+    
+   // add an attribute
    dataFile.putAtt("Creation date:", "26 Feb 2019");
    return 0; 
 }
@@ -96,7 +102,7 @@ int netCDF_read() {
     // Specify the netCDF file. 
     NcFile dataFile("output.nc", NcFile::read);
     
-    // Read the two dimensions.
+    // Read the three dimensions.
     NcDim xDim = dataFile.getDim("x");
     NcDim yDim = dataFile.getDim("y");
     NcDim zDim = dataFile.getDim("z");
@@ -115,7 +121,11 @@ int netCDF_read() {
     // Put the data in a var.
     double dataOut[nx][ny][nz];
     data.getVar(&dataOut);
-
+    for(int z=0; z<nz; z++){
+        for (int y = 0; y < ny; y++) {
+            cout << dataOut[0][y][z] << '\t' << dataOut[1][y][z] << '\t' << dataOut[2][y][z] << '\t' << dataOut[3][y][z] << endl;
+        }
+    }
     return 0; 
 }
 
@@ -145,7 +155,9 @@ int main() {
   x = {S0, K0, Z0}; // new initial conditions
   saves = 1; // counter for number of saves
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
+    
 //  print_array(history);
   netCDF_write(history);
+  netCDF_read();
   
 }
