@@ -24,16 +24,6 @@ using namespace std;
 // write data to the netCDF file
 // function here
     
-// Create the file.
-//NcFile dataFile("pres_temp_4D.nc", NcFile::Replace);
-// Define dimensions
-// One dimension for the S K Z data
-// One dimension for time
-// One dimension for the two result sets
-//NcDim *lvlDim, *latDim, *lonDim, *recDim;
-//latDim = dataFile.add_dim("latitude", NLAT);
-//lonDim = dataFile.add_dim("longitude", NLON);
-//recDim = dataFile.add_dim("time"); //this is an unlimited dimension
 
 // defining constants and initial conditions
 const double A = 0.03;  // rate at which zombies are killed by K
@@ -47,7 +37,7 @@ double num = 50; // number of steps to perform
 int i = 0;
 
 // defining boost array to hold x = ( S, K, Z )
-typedef boost::array< double , 3 > state_type;
+typedef boost::array<double, 3> state_type;
     
 // defining 3D array to hold data history
 // dimensions: tSKZ, time, 2 saves
@@ -55,8 +45,9 @@ rarray<double,3> history(4,num,2);
 
 // saves data in array
 void add_to_array(const state_type &x , const double t){
-    cout << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << endl; 
     i = i++; // increment
+    cout << i << '\t' << t << '\t' << x[0] << '\t' << x[1] << '\t' << x[2] << endl; 
+
 }
 
 
