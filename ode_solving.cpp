@@ -112,6 +112,7 @@ int netCDF_read() {
             cout << "With 16 initial zombies, they lose" << endl;
         }
         else{
+            cout << endl; cout << endl;
             cout << "With 263 initial zombies, they win" << endl;
         }
         cout << "time \t S \t K \t Z" << endl;
