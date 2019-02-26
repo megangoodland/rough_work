@@ -14,7 +14,7 @@
 #include <iostream>
 #include <boost/numeric/odeint.hpp>
 #include <boost/array.hpp>
-#include <netcdfcpp.h>
+#include <netcdf>
 #include <rarray>
 #include <rarrayio>
 using namespace boost::numeric::odeint;
