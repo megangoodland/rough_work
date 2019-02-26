@@ -67,17 +67,23 @@ void zombie_odes( const state_type &x , state_type &dxdt , double t ){
 
 
 int main() { 
-  double Z0 = 16; // number of zombies: will be varying this value 263
+  double Z0 = 16; // number of zombies: will be varying this value
   double S0 = 491 - Z0; // number of regular people who can't kill zombies
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
   int n1;
   // perform the integration once to find out how many steps were taken
   n1 = integrate(zombie_odes , x , 0.0 , num , 0.01);
+  cout << endl;
   cout << n1 << endl;
+  cout << endl;
+  cout << endl;
   // perform the integration again, now saving the history to an array
-    
-  integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
+  n1 = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
+  cout << endl;
+  cout << n1 << endl;
+  cout << endl;
+  cout << endl;
   
   //print_array(history);
   
