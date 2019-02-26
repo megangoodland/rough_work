@@ -14,15 +14,13 @@
 #include <iostream>
 #include <boost/numeric/odeint.hpp>
 #include <boost/array.hpp>
+#include <vector>
 #include <netcdf>
 #include <rarray>
 #include <rarrayio>
 using namespace boost::numeric::odeint;
 using namespace std;
-
-
-// write data to the netCDF file
-// function here
+using namespace netCDF;
     
 
 // defining constants and initial conditions
@@ -58,6 +56,71 @@ void add_to_array(const state_type &x , const double t){
 //        }
 //}
 
+int netCDF_write(rarray<int,3>& array_to_print) {
+   int nx = array_to_print.extent(0);
+   int ny = array_to_print.extent(1);
+   int nz = array_to_print.extent(2);
+   double dataOut[nx][ny][nz];
+
+   for(int x = 0; x < nx; x++){
+        for(int y = 0; y < ny; y++){
+             for(int z = 0; z < nz; z++){
+                 dataOut[x][y][z] = array_to_print[x][y][z];
+             }
+        }  
+   }
+         
+   // Create the netCDF file.
+   NcFile dataFile("output.nc", NcFile::replace);
+   // Create the three dimensions.
+   NcDim xDim = dataFile.addDim("x",nx);
+   NcDim yDim = dataFile.addDim("y",ny);
+   NcDim zDim = dataFile.addDim("z",nz);
+    
+   std::vector<NcDim> dims(3);
+   dims[0] = xDim;
+   dims[1] = yDim;
+   dims[2] = zDim;
+   // Create the data variable.
+   NcVar data = dataFile.addVar("data", ncInt, dims);
+   // Put the data in the file.
+   data.putVar(&dataOut); // writing all the data in one operation
+   // Add an attribute.
+   dataFile.putAtt("Creation date:", "26 Feb 2019");
+   return 0; 
+}
+
+
+int netCDF_read() {
+    // Specify the netCDF file. 
+    NcFile dataFile("output.nc", NcFile::read);
+    
+    // Read the two dimensions.
+    NcDim xDim = dataFile.getDim("x");
+    NcDim yDim = dataFile.getDim("y");
+    NcDim zDim = dataFile.getDim("z");
+    int nx = xDim.getSize(); 
+    int ny = yDim.getSize(); 
+    int nz = zDim.getSize(); 
+
+    std::cout << "Our matrix is " << nx << " by " << ny << std::endl;
+    //int **p = new int *[nx];
+    //p[0] = new int[nx * ny];
+    //for(int i = 0; i < nx; i++)
+    //  p[i] = &p[0][i * ny];
+      
+    // Retrieve the variable named "data"
+    NcVar data = dataFile.getVar("data");
+    // Put the data in a var.
+    double dataOut[nx][ny][nz];
+    data.getVar(&dataOut);
+
+    return 0; 
+}
+
+
+
+
 
 // x = ( S, K, Z )
 void zombie_odes( const state_type &x , state_type &dxdt , double t ){
@@ -82,5 +145,6 @@ int main() {
   saves = 1; // counter for number of saves
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
 //  print_array(history);
+  netCDF_write(history);
   
 }
