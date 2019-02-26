@@ -33,7 +33,7 @@ const double E = 0.015; // rate at which zombie killers teach regular people how
 const double K0 = 9; // number of people who can kill zombies
 int i = 0; // counter for integrate steps
 int saves = 0; // counter for number of saves
-double num = 50; // number of steps to perform
+double num = 50; // max time
 
 // defining boost array to hold x = ( S, K, Z )
 typedef boost::array<double, 3> state_type;
@@ -67,13 +67,17 @@ void zombie_odes( const state_type &x , state_type &dxdt , double t ){
 
 
 int main() { 
-  double Z0 = 5; // number of zombies: will be varying this value 263
+  double Z0 = 16; // number of zombies: will be varying this value 263
   double S0 = 491 - Z0; // number of regular people who can't kill zombies
   state_type x = {S0, K0, Z0}; // initial conditions
   // integrate needs (system, x0, t0, t1, dt, observer)
-  int n;
-  n = integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
-  cout << n << endl;
+  int n1;
+  // perform the integration once to find out how many steps were taken
+  n1 = integrate(zombie_odes , x , 0.0 , num , 0.01);
+  cout << n1 << endl;
+  // perform the integration again, now saving the history to an array
+    
+  integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
   
   //print_array(history);
   
