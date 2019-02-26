@@ -77,12 +77,13 @@ int netCDF_write(rarray<double,3>& array_to_print) {
    NcDim yDim = dataFile.addDim("y",ny);
    NcDim zDim = dataFile.addDim("z",nz);
     
-   std::vector<NcDim> dims(3);
+   // Define the variable
+   vector<NcDim> dims(3);
    dims[0] = xDim;
    dims[1] = yDim;
    dims[2] = zDim;
    // Create the data variable.
-   NcVar data = dataFile.addVar("data", ncInt, dims);
+   NcVar data = dataFile.addVar("data", ncDouble, dims);
    // Put the data in the file.
    data.putVar(&dataOut); // writing all the data in one operation
    // Add an attribute.
