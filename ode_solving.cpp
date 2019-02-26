@@ -31,6 +31,7 @@ const double B = 0.02;  // rate at which regular people are turned into Z
 const double C = 0.01;  // rate as which zombie killers are turned into Zombies
 const double E = 0.015; // rate at which zombie killers teach regular people how to kill zombies
 const double K0 = 9; // number of people who can kill zombies
+int i = 0; // integration steps
 int saves = 0; // counter for number of saves
 double num = 50; // max time
 int max_observes = 200; // max number of observes we're doing
@@ -45,6 +46,7 @@ rarray<double,3> history(4, max_observes, 2);
 // saves data in array
 void add_to_array(const state_type &x , const double t){
     history[0][i][saves] = t; history[1][i][saves] = x[0]; history[2][i][saves] = x[1]; history[3][i][saves] = x[2]; 
+    i = i+1;
 }
 
 
@@ -73,6 +75,7 @@ int main() {
   integrate(zombie_odes , x , 0.0 , num , 0.01 , add_to_array);
 //  print_array(history);
   
+  i = 0; // resetting integration steps
   Z0 = 263; // new number of zombies 5
   S0 = 491 - Z0; // number of regular people who can't kill zombies
   x = {S0, K0, Z0}; // new initial conditions
