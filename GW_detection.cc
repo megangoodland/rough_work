@@ -26,5 +26,5 @@
 
 netCDF::NcFile file("detection01.nc", netCDF::NcFile::read); // selects the file to read
 rarray<std::complex<double>,1> f(file.getDim("nt").getSize());
-NcVar data = file.getVar("f");
+netCDF::NcVar data = file.getVar("f");
 data.getVar(&f[0]);
