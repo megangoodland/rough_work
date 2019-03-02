@@ -28,15 +28,15 @@ using namespace std;
 using namespace netCDF;
 int main(){
   NcFile file("detection01.nc", NcFile::read); // selects the file to read
-//NcDim ntDim = file.getDim('nt');
-//int nt_size = ntDim.getSize(); // size of data
+  NcDim ntDim = file.getDim('nt');
+  int nt_size = ntDim.getSize(); // size of data
 
-//NcVar data = file.getVar("f"); // Get variable named 'f'
+  NcVar data = file.getVar("f"); // Get variable named 'f'
 // put data in a var
-//double dataOut[nt_size];
-//data.getVar(&dataOut);
-//eff = rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
-//cout << dataOut[0] << endl;
+  double dataOut[nt_size];
+  data.getVar(&dataOut);
+ // eff = rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
+  cout << dataOut[0] << endl;
   return 0;
 }
 
