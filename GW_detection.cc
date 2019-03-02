@@ -39,14 +39,24 @@ rarray<complex<double>,1> get_f(string s){
   return f;
 }
 
+// This function returns the size of variable f from a netCDF file
+int get_f_size(string s){
+  NcFile file(s, NcFile::read); // selects the file to read
+  rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
+  file.getVar("f").getVar(&f[0]); // putting data in rarray
+  int f_size = f.extent(0);
+  return f_size;
+}
+
 
 int main(){
  // int n_detections = 32; // number of detections
  // rarray<complex<double>,1> pred
-  get_f("GWprediction.nc");
+
  // First, compute fft of the two complex quantities using FFTW
  // Get length of f
-  int f_size = f.extent(0);
+  int f_size = get_f_size("GWprediction.nc");
+  get_f("GWprediction.nc");
   cout << f_size << endl;
     
     
