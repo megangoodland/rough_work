@@ -55,7 +55,7 @@ int main(){
 
  // First, compute fft of the two complex quantities using FFTW
  // Get length of f
-  int f_size = get_f_size("GWprediction.nc");
+  int f_size = get_f_size("detection01.nc");
   get_f("GWprediction.nc");
   cout << f_size << endl;
     
