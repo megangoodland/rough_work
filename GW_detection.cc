@@ -26,7 +26,8 @@
 #include <complex>
 using namespace std;
 using namespace netCDF;
-NcFile file("detection01.nc", NcFile::read); // selects the file to read
+int main(){
+  NcFile file("detection01.nc", NcFile::read); // selects the file to read
 //NcDim ntDim = file.getDim('nt');
 //int nt_size = ntDim.getSize(); // size of data
 
@@ -36,3 +37,6 @@ NcFile file("detection01.nc", NcFile::read); // selects the file to read
 //data.getVar(&dataOut);
 //eff = rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
 //cout << dataOut[0] << endl;
+  return 0;
+}
+
