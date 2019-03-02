@@ -22,6 +22,7 @@
 #include <iostream>
 #include <rarray>
 #include <rarrayio>
+#include <vector>
 #include <netcdf>
 #include <complex>
 using namespace std;
@@ -33,7 +34,7 @@ int main(){
 
   NcVar data = file.getVar("f"); // Get variable named 'f'
 // put data in a var
- // double dataOut[nt_size];
+  double dataOut[nt_size];
   //data.getVar(&dataOut);
  // eff = rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
 
