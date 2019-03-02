@@ -43,7 +43,7 @@ rarray<complex<double>,1> get_f(string s){
 int main(){
  // int n_detections = 32; // number of detections
  // rarray<complex<double>,1> pred
-  get_f("GWprediction.nc")
+  get_f("GWprediction.nc");
  // First, compute fft of the two complex quantities using FFTW
  // Get length of f
   f_size = f.extent(0);
