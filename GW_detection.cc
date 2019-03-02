@@ -39,7 +39,9 @@ rarray<complex<double>,1> get_f(string s){
 
 
 int main(){
-  f01 = get_f("detection01.nc");
+  
+  get_f("detection01.nc");
+  
   // The power spectrum F of a signal f is related to the fourier transform of that 
   // signal: for each wave number k (freq num in this case), the power spectrum is 
   // the square norm of the fourier component with that wavenumber.
