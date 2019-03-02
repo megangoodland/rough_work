@@ -27,11 +27,15 @@
 #include <complex>
 using namespace std;
 using namespace netCDF;
-int main(){
+void get_f(){
   NcFile file("detection01.nc", NcFile::read); // selects the file to read
   rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
   file.getVar("f").getVar(&f[0]);
-  cout << f << endl;
+}
+
+
+int main(){
+  get_f();
   return 0;
 }
 
