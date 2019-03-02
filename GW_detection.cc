@@ -52,7 +52,6 @@ int get_f_size(string s){
 
 int main(){
  // int n_detections = 32; // number of detections
- rarray<complex<double>,1> pred
 
  // First, compute fft of the two complex quantities using FFTW
  // Get length of f
