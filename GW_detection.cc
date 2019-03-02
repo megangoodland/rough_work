@@ -33,7 +33,7 @@ int main(){
   int nt_size = ntDim.getSize(); // size of data
   NcVar data = file.getVar("f"); // Get variable named 'f'
   rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
-
+  file.getVar("f").getVar(&f[0]);
   return 0;
 }
 
