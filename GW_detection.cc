@@ -17,7 +17,8 @@
 //
 //     ./GW_detection
 // 
-// Megan Goodland, March 2019, for Assignment 6 of PHY1610 at University of Toronto
+// Megan Goodland, March 2019.
+// Assignment 6 of PHY1610 at University of Toronto
 
 #include <iostream>
 #include <rarray>
@@ -25,6 +26,7 @@
 #include <vector>
 #include <netcdf>
 #include <complex>
+#include <fftw3.h>
 using namespace std;
 using namespace netCDF;
 // This function reads f from the file and returns it in an rarray
@@ -39,8 +41,28 @@ rarray<complex<double>,1> get_f(string s){
 
 
 int main(){
+ // int n_detections = 32; // number of detections
+ // rarray<complex<double>,1> pred
+  get_f("GWprediction.nc")
+ // First, compute fft of the two complex quantities using FFTW
+ // Get length of f
+  f_size = f.extent(0);
+  cout << f_size << endl;
+    
+    
   
-  get_f("detection01.nc");
+ // rarray<complex<double>,2> detections(n_detections); // rarray to hold all detection data
+  
+//  for (int i=1; i<(n_detections+1); i++){
+ //   if (i<10){
+ //     detections
+ //   }
+ //   if (i>10){
+ //     
+ //   }
+ // }
+  
+  //get_f("detection01.nc");
   
   // The power spectrum F of a signal f is related to the fourier transform of that 
   // signal: for each wave number k (freq num in this case), the power spectrum is 
