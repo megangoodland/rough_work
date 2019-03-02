@@ -36,7 +36,7 @@ int main(){
   double dataOut[nt_size];
   data.getVar(&dataOut);
  // eff = rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
-  cout << dataOut[0] << endl;
+  cout << dataOut << endl;
   return 0;
 }
 
