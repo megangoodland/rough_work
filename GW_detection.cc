@@ -29,6 +29,7 @@
 #include <fftw3.h>
 using namespace std;
 using namespace netCDF;
+
 // This function reads f from the file and returns it in an rarray
 // Input: name of the file
 // Output: 1D complex double rarray
@@ -51,12 +52,13 @@ int get_f_size(string s){
 
 int main(){
  // int n_detections = 32; // number of detections
- // rarray<complex<double>,1> pred
+ rarray<complex<double>,1> pred
 
  // First, compute fft of the two complex quantities using FFTW
  // Get length of f
-  int f_size = get_f_size("detection01.nc");
-  get_f("GWprediction.nc");
+  const int f_size = get_f_size("GWprediction.nc"); // Only need to do this once because f is same size in all files
+  rarray<complex<double>,1> f(f_size); // initialize array to hold f
+  f = get_f("GWprediction.nc"); // fill f with data from netCDF file
   cout << f_size << endl;
     
     
