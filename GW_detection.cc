@@ -51,14 +51,22 @@ int get_f_size(string s){
 
 
 int main(){
- // int n_detections = 32; // number of detections
+  // int n_detections = 32; // number of detections
 
- // First, compute fft of the two complex quantities using FFTW
- // Get length of f
+  // First, compute fft of the two complex quantities using FFTW
+  // Get f
   const int f_size = get_f_size("GWprediction.nc"); // Only need to do this once because f is same size in all files
   rarray<complex<double>,1> f(f_size); // initialize array to hold f
   f = get_f("GWprediction.nc"); // fill f with data from netCDF file
   cout << f_size << endl;
+  // get fast fourier transform
+  complex<double> f[f_size],fhat[f_size]; // sorry, should be dynamic (?)
+  
+  fftw_plan p = fftw_plan_dft_1d(f_size,
+                      (fftw_complex*)f, (fftw_complex*)fhat,
+                      FFTW_FORWARD, FFTW_ESTIMATE);
+  fftw_execute(p);
+  fftw_destroy_plan(p);
     
     
   
