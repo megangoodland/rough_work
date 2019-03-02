@@ -27,20 +27,23 @@
 #include <complex>
 using namespace std;
 using namespace netCDF;
-void get_f(string s){
+// This function reads f from the file and returns it in an rarray
+// Input: name of the file
+// Output: 1D complex double rarray
+rarray<complex<double>,1> get_f(string s){
   NcFile file(s, NcFile::read); // selects the file to read
   rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
   file.getVar("f").getVar(&f[0]); // putting data in rarray
+  return f;
 }
 
 
 int main(){
-  get_f("detection01.nc");
-  // the power spectrum F of a signal f is related to the fourier transform of that 
+  f01 = get_f("detection01.nc");
+  // The power spectrum F of a signal f is related to the fourier transform of that 
   // signal: for each wave number k (freq num in this case), the power spectrum is 
   // the square norm of the fourier component with that wavenumber.
-  
-  // first, compute fft of the two complex quantities using FFTW
+  // First, compute fft of the two complex quantities using FFTW
   return 0;
 }
 
