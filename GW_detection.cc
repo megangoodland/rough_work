@@ -30,7 +30,7 @@ using namespace netCDF;
 void get_f(){
   NcFile file("detection01.nc", NcFile::read); // selects the file to read
   rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
-  file.getVar("f").getVar(&f[0]);
+  file.getVar("f").getVar(&f[0]); // putting data in rarray
 }
 
 
