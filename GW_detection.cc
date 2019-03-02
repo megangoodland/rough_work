@@ -25,11 +25,14 @@
 #include <netcdf>
 #include <complex>
 using namespace std;
+using namespace netCDF;
+NcFile file("detection01.nc", NcFile::read); // selects the file to read
+NcDim ntDim = file.getDim('nt');
+int nt_size = ntDim.getSize(); // size of data
 
-netCDF::NcFile file("detection01.nc", netCDF::NcFile::read); // selects the file to read
-
-netCDF::NcVar data = file.getVar("f"); // Get variable named 'f'
-
-eff = rarray<std::complex<double>,1> f(file.getDim("nt").getSize()); // put 'f' in rarray
-
-cout << eff << endl;
+NcVar data = file.getVar("f"); // Get variable named 'f'
+// put data in a var
+double dataOut[nt_size];
+data.getVar(&dataOut);
+//eff = rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
+cout << dataOut[0] << endl;
