@@ -19,12 +19,17 @@
 // 
 // Megan Goodland, March 2019, for Assignment 6 of PHY1610 at University of Toronto
 
-
+#include <iostream>
 #include <rarray>
+#include <rarrayio>
 #include <netcdf>
 #include <complex>
+using namespace std;
 
 netCDF::NcFile file("detection01.nc", netCDF::NcFile::read); // selects the file to read
-rarray<std::complex<double>,1> f(file.getDim("nt").getSize());
-netCDF::NcVar data = file.getVar("f");
-data.getVar(&f[0]);
+
+netCDF::NcVar data = file.getVar("f"); // Get variable named 'f'
+
+eff = rarray<std::complex<double>,1> f(file.getDim("nt").getSize()); // put 'f' in rarray
+
+cout << eff << endl;
