@@ -8,16 +8,6 @@
 #ifndef netCDF_reading_h
 #define netCDF_reading_h
 
-#include <iostream>
-#include <rarray>
-#include <rarrayio>
-#include <vector>
-#include <netcdf> // for file i/o
-#include <complex>
-
-using namespace std;
-using namespace netCDF;
-
 // get_f: This function reads f from the file and returns it in an rarray
 //      Input: name of the file
 //      Output: 1D complex double rarray
