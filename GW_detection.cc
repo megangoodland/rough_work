@@ -24,9 +24,10 @@
 #include <rarray>
 #include <rarrayio>
 #include <vector>
-#include <netcdf>
+#include <netcdf> // for file i/o
 #include <complex>
-#include <fftw3.h>
+#include <fftw3.h> // for fft stuff
+#include <cmath> // for pow
 using namespace std;
 using namespace netCDF;
 
@@ -68,7 +69,7 @@ rarray<double,1> sq_norm(rarray<complex<double>,1>& fhat){
   int f_size = fhat.extent(0);
   rarray<double,1> normsq(f_size);
   for (int i=0; i<f_size; i++){
-    normsq[i] = (norm(fhat[i]))^2; // calculate the norm squared for each value, put in new array
+    normsq[i] = pow((norm(fhat[i])),2); // calculate the norm squared for each value, put in new array
   }
   return normsq;
 }
@@ -78,17 +79,18 @@ rarray<double,1> sq_norm(rarray<complex<double>,1>& fhat){
 int main(){
   // int n_detections = 32; // number of detections
 
-  // First, compute fft of the two complex quantities using FFTW
-  // Get f
+  // Initializing rarrays and constants
   const int f_size = get_f_size("GWprediction.nc"); // Only need to do this once because f is same size in all files
   rarray<complex<double>,1> f(f_size); // initialize array to hold f
   rarray<complex<double>,1> fhat(f_size); // initialize array to hold fhat
   rarray<double,1> Fk(f_size); // initialize array to hold Fk
   
-  f = get_f("GWprediction.nc"); // fill f with data from netCDF file
-  cout << f_size << endl;
+  // Fill f with data from netCDF file
+  f = get_f("GWprediction.nc"); 
+  
   // Get fast fourier transform
   fhat = fft(f);
+  
   // Get Fk
   Fk = sq_norm(fhat);
   cout << Fk[3] << endl;
