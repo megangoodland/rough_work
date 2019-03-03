@@ -26,8 +26,9 @@
 #include <vector>
 #include <complex>
 #include <stdio.h>
-#include "rarray_math.h"
 #include "netCDF_reading.h"
+#include "rarray_math.h"
+
 
 using namespace std;
 
