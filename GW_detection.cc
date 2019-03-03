@@ -68,7 +68,7 @@ double correlation(rarray<double,1>& Fk,rarray<double,1>& Gk){
   double FF = cblas_ddot(f_size, A, 1, A, 1);
   double GG = cblas_ddot(f_size, B, 1, B, 1);
   // C_FG = <F,G> / sqrt(<F,F><G,G>)
-  return double C = FG/(sqrt(FF*GG));
+  return (FG/(sqrt(FF*GG)));
 }
 
 int main(){
