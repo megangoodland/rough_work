@@ -11,8 +11,8 @@ GW_detection: GW_detection.o netCDF_reading.o
 GW_detection.o: GW_detection.cc
 	${CXX} -std=c++11 -O3 -march=native -c GW_detection.cc
 	
-netCDF_reading.o: netCDF_reading.cpp netCDF_reading.h
-	${CXX} netCDF_reading.cpp -c -o netCDF_reading.o -c
+netCDF_reading.o: netCDF_reading.cc netCDF_reading.h
+	${CXX} netCDF_reading.cc -c -o netCDF_reading.o -c
 
 clean:
 	rm *.o GW_detection
