@@ -6,6 +6,7 @@
 #include <rarray>
 #include <rarrayio>
 #include <complex>
+#include "netCDF_reading.h"
 
 //using namespace std;
 
