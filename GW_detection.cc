@@ -28,6 +28,7 @@
 #include <fftw3.h> // for fft stuff
 #include <cmath> // for pow
 #include "netCDF_reading.h"
+#include <cblas.h>
 using namespace std;
 using namespace netCDF;
 
