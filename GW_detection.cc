@@ -26,11 +26,9 @@
 #include <vector>
 #include <complex>
 #include <stdio.h>
-#include <fftw3.h> // for fft stuff
-#include <cmath> // for pow
+
 #include "netCDF_reading.h"
 #include "rarray_math.h"
-#include <cblas.h>
 using namespace std;
 using namespace netCDF;
 
