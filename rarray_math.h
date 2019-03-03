@@ -6,11 +6,12 @@
 #include <rarray>
 #include <rarrayio>
 #include <vector>
-#include <netcdf> // for file i/o
 #include <complex>
-
+#include <stdio.h>
+#include <fftw3.h> // for fft stuff
+#include <cmath> // for pow
+#include <cblas.h>
 using namespace std;
-using namespace netCDF;
 
 // fft: Fast fourier transform function for 1D complex double rarray
 //      Input: f rarray
