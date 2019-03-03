@@ -21,11 +21,11 @@
 // get_f: This function reads f from the file and returns it in an rarray
 //      Input: name of the file
 //      Output: 1D complex double rarray
-rarray<std::complex<double>,1> get_f(string s);
+rarray<std::complex<double>,1> get_f(std::string s);
 
 // get_f_size: This function returns the size of variable f from a netCDF file
 //      Input: name of the file
 //      Output: size of variable f in the file
-int get_f_size(string s);
+int get_f_size(std::string s);
 
 #endif /* netCDF_reading */
