@@ -83,6 +83,10 @@ int main(){
   
   cout << Gk[3] << endl;
   cout << Fk[3] << endl;
+  
+  // double cblas_ddot(const int N, const double *X, const int incX, const double *Y, const int incY);
+  double x = cblas_ddot(f_size, Fk, 1, Gk, 1)
+  cout << x << endl;
     
   
  // rarray<complex<double>,2> detections(n_detections); // rarray to hold all power spectra
