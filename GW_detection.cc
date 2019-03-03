@@ -64,15 +64,23 @@ int main(){
   rarray<complex<double>,1> f(f_size); // initialize array to hold f
   rarray<complex<double>,1> fhat(f_size); // initialize array to hold fhat
   rarray<double,1> Fk(f_size); // initialize array to hold Fk
+  rarray<double,1> Gk(f_size); // initialize array to hold Gk
   
   // Fill f with data from netCDF file
   f = get_f("GWprediction.nc"); 
-  
   // Get fast fourier transform
   fhat = fft(f);
-  
   // Get Fk
   Fk = sq_norm(fhat);
+  
+  cout << Fk[3] << endl;
+  
+  // Get Gk with same steps, overwriting f and fhat
+  f = get_f("detection01.nc");
+  fhat = fft(f);
+  Gk = sq_norm(fhat);
+  
+  cout << Gk[3] << endl;
   cout << Fk[3] << endl;
     
   
