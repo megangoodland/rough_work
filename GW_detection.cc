@@ -25,6 +25,7 @@
 #include <rarrayio>
 #include <vector>
 #include <complex>
+#include <stdio.h>
 #include <fftw3.h> // for fft stuff
 #include <cmath> // for pow
 #include "netCDF_reading.h"
@@ -74,8 +75,6 @@ int main(){
   // Get Fk
   Fk = sq_norm(fhat);
   
-  cout << Fk[3] << endl;
-  
   // Get Gk with same steps, overwriting f and fhat
   f = get_f("detection01.nc");
   fhat = fft(f);
@@ -84,9 +83,12 @@ int main(){
   cout << Gk[3] << endl;
   cout << Fk[3] << endl;
   
+  double *A = new double[f_size]; // put in a way that cblas will work with
+  for (int i=0; i<f_size; i++) A[i] = Fk[i];
+  cout << A[3] << endl;
   // double cblas_ddot(const int N, const double *X, const int incX, const double *Y, const int incY);
-  double x = cblas_ddot(f_size, Fk, 1, Gk, 1)
-  cout << x << endl;
+  //double x = cblas_ddot(f_size, Fk, 1, Gk, 1)
+  //cout << x << endl;
     
   
  // rarray<complex<double>,2> detections(n_detections); // rarray to hold all power spectra
