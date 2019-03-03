@@ -49,7 +49,7 @@ int get_f_size(string s){
   return f_size;
 }
 
-// fast fourier transform function
+// Fast fourier transform function
 // Input: f rarray
 // Output: fhat rarray
 rarray<complex<double>,1> fft(rarray<complex<double>,1>& f){
@@ -63,6 +63,15 @@ rarray<complex<double>,1> fft(rarray<complex<double>,1>& f){
   return fhat;
 }
 
+// This function returns an rarray of the square norms of the complex values in the rarray input
+rarray<double,1> sq_norm(rarray<complex<double>,1>& fhat){
+  int f_size = fhat.extent(0);
+  rarray<double,1> normsq(f_size);
+  for (int i=0; i<f_size; i++){
+    normsq[i] = (norm(fhat[i]))^2; // calculate the norm squared for each value, put in new array
+  }
+  return normsq;
+}
 
 
 
@@ -74,15 +83,18 @@ int main(){
   const int f_size = get_f_size("GWprediction.nc"); // Only need to do this once because f is same size in all files
   rarray<complex<double>,1> f(f_size); // initialize array to hold f
   rarray<complex<double>,1> fhat(f_size); // initialize array to hold fhat
+  array<complex<double>,1> Fk(f_size); // initialize array to hold Fk
   
   f = get_f("GWprediction.nc"); // fill f with data from netCDF file
   cout << f_size << endl;
-  // get fast fourier transform
+  // Get fast fourier transform
   fhat = fft(f);
-    
+  // Get Fk
+  Fk = sq_norm(fhat);
+  cout << Fk[3] << endl;
     
   
- // rarray<complex<double>,2> detections(n_detections); // rarray to hold all detection data
+ // rarray<complex<double>,2> detections(n_detections); // rarray to hold all power spectra
   
 //  for (int i=1; i<(n_detections+1); i++){
  //   if (i<10){
