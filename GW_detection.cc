@@ -24,31 +24,12 @@
 #include <rarray>
 #include <rarrayio>
 #include <vector>
-#include <netcdf> // for file i/o
 #include <complex>
 #include <fftw3.h> // for fft stuff
 #include <cmath> // for pow
+#include "netCDF_reading.h"
 using namespace std;
 using namespace netCDF;
-
-// This function reads f from the file and returns it in an rarray
-// Input: name of the file
-// Output: 1D complex double rarray
-rarray<complex<double>,1> get_f(string s){
-  NcFile file(s, NcFile::read); // selects the file to read
-  rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
-  file.getVar("f").getVar(&f[0]); // putting data in rarray
-  return f;
-}
-
-// This function returns the size of variable f from a netCDF file
-int get_f_size(string s){
-  NcFile file(s, NcFile::read); // selects the file to read
-  rarray<complex<double>,1> f(file.getDim("nt").getSize()); // defining rarray called f to hold the data
-  file.getVar("f").getVar(&f[0]); // putting data in rarray
-  int f_size = f.extent(0);
-  return f_size;
-}
 
 // Fast fourier transform function
 // Input: f rarray
@@ -73,7 +54,6 @@ rarray<double,1> sq_norm(rarray<complex<double>,1>& fhat){
   }
   return normsq;
 }
-
 
 
 int main(){
