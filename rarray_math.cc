@@ -6,15 +6,16 @@
 #include <fftw3.h> // for fft stuff
 #include <cmath> // for pow
 #include <cblas.h>
+
 #include "rarray_math.h"
-using namespace std;
+//using namespace std;
 
 // Fast fourier transform function
 // Input: f rarray
 // Output: fhat rarray
-rarray<complex<double>,1> fft(rarray<complex<double>,1>& f){
+rarray<std::complex<double>,1> fft(rarray<std::complex<double>,1>& f){
   int f_size = f.extent(0);
-  rarray<complex<double>,1> fhat(f_size); // initialize array to hold fhat
+  rarray<std::complex<double>,1> fhat(f_size); // initialize array to hold fhat
   fftw_plan p = fftw_plan_dft_1d(f_size,
                       (fftw_complex*)f.data(), (fftw_complex*)fhat.data(),
                       FFTW_FORWARD, FFTW_ESTIMATE);
@@ -24,7 +25,7 @@ rarray<complex<double>,1> fft(rarray<complex<double>,1>& f){
 }
 
 // This function returns an rarray of the square norms of the complex values in the rarray input
-rarray<double,1> sq_norm(rarray<complex<double>,1>& fhat){
+rarray<double,1> sq_norm(rarray<std::complex<double>,1>& fhat){
   int f_size = fhat.extent(0);
   rarray<double,1> normsq(f_size);
   for (int i=0; i<f_size; i++){
