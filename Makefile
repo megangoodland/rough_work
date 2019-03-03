@@ -15,7 +15,7 @@ rarray_math.o: rarray_math.cc rarray_math.h
 	${CXX} -std=c++11 -O3 -march=native -c rarray_math.cc -I${BLAS_INC} -L${BLAS_LIB} -lopenblas -lfftw3
 	
 netCDF_reading.o: netCDF_reading.cc netCDF_reading.h
-	${CXX} netCDF_reading.cc -c -o netCDF_reading.o -c
+	${CXX} -std=c++11 -O3 -march=native -c netCDF_reading.cc -lnetcdf_c++4
 	
 
 clean:
