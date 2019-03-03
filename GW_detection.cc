@@ -43,7 +43,7 @@ rarray<complex<double>,1> fft(rarray<complex<double>,1>& f){
                       (fftw_complex*)f.data(), (fftw_complex*)fhat.data(),
                       FFTW_FORWARD, FFTW_ESTIMATE);
   fftw_execute(p);
-  fftw_destroy_plan(p); // dont destroy the plan if you are reusing it 
+  fftw_destroy_plan(p); 
   return fhat;
 }
 
@@ -57,6 +57,7 @@ rarray<double,1> sq_norm(rarray<complex<double>,1>& fhat){
   return normsq;
 }
 
+// This function calculates the correlation between two 1D rarrays via C_FG = <F,G> / sqrt(<F,F><G,G>)
 double correlation(rarray<double,1>& Fk,rarray<double,1>& Gk){
   int f_size = Fk.extent(0); // they'll be the same size
   double *A = new double[f_size]; // put in a way that cblas will work with
