@@ -6,7 +6,7 @@ CXX = g++
 #all: GW_detection
 
 GW_detection: GW_detection.o netCDF_reading.o
-	${CXX} -std=c++11 -O3 -march=native GW_detection.o netCDF_reading.o -o GW_detection -lnetcdf_c++4 -lfftw3
+	${CXX} -std=c++11 -O3 -march=native GW_detection.o netCDF_reading.o -o GW_detection -lnetcdf_c++4 -lfftw3 -I${BLAS_INC} -L${BLAS_LIB} -lopenblas
 
 GW_detection.o: GW_detection.cc
 	${CXX} -std=c++11 -O3 -march=native -c GW_detection.cc
