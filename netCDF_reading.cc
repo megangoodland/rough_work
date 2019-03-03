@@ -1,11 +1,7 @@
 // Module for reading the netCDF files for GW_detection.cc
-#include <iostream>
-#include <rarray>
-#include <rarrayio>
-#include <vector>
-#include <netcdf> // for file i/o
-#include <complex>
+
 #include "netCDF_reading.h"
+#include <netcdf> // for file i/o
 
 using namespace std;
 using namespace netCDF;
