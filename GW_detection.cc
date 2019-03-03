@@ -83,7 +83,7 @@ int main(){
   const int f_size = get_f_size("GWprediction.nc"); // Only need to do this once because f is same size in all files
   rarray<complex<double>,1> f(f_size); // initialize array to hold f
   rarray<complex<double>,1> fhat(f_size); // initialize array to hold fhat
-  array<complex<double>,1> Fk(f_size); // initialize array to hold Fk
+  rarray<double,1> Fk(f_size); // initialize array to hold Fk
   
   f = get_f("GWprediction.nc"); // fill f with data from netCDF file
   cout << f_size << endl;
