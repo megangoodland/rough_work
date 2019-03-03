@@ -54,6 +54,7 @@ int get_f_size(string s){
 // Output: fhat rarray
 rarray<complex<double>,1> fft(rarray<complex<double>,1>& f){
   int f_size = f.extent(0);
+  rarray<complex<double>,1> fhat(f_size); // initialize array to hold fhat
   fftw_plan p = fftw_plan_dft_1d(f_size,
                       (fftw_complex*)f.data(), (fftw_complex*)fhat.data(),
                       FFTW_FORWARD, FFTW_ESTIMATE);
