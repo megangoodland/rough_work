@@ -12,12 +12,12 @@
 // fft: Fast fourier transform function for 1D complex double rarray
 //      Input: f rarray
 //      Output: fhat rarray
-rarray<complex<double>,1> fft(rarray<complex<double>,1>& f);
+rarray<std::complex<double>,1> fft(rarray<std::complex<double>,1>& f);
 
 // sq_norm: This function returns an rarray of the square norms of the complex values in the rarray input
 //      Input: 1D complex double rarray
 //      Output: 1D double rarray
-rarray<double,1> sq_norm(rarray<complex<double>,1>& fhat);
+rarray<double,1> sq_norm(rarray<std::complex<double>,1>& fhat);
 
 // correlation: This function calculates the correlation between two 1D rarrays via C_FG = <F,G> / sqrt(<F,F><G,G>)
 //      Input: Two 1D double rarrays
