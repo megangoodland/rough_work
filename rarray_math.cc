@@ -1,10 +1,7 @@
 // Module for doing math functions on rarrays for GW_detection.cc
 
-#include <iostream>
-#include <rarray>
-#include <rarrayio>
+
 #include <vector>
-#include <complex>
 #include <stdio.h>
 #include <fftw3.h> // for fft stuff
 #include <cmath> // for pow
