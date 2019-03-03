@@ -20,14 +20,15 @@
 // Megan Goodland, March 2019.
 // Assignment 6 of PHY1610 at University of Toronto
 
+#include "netCDF_reading.h"
+#include "rarray_math.h"
 #include <iostream>
 #include <rarray>
 #include <rarrayio>
 #include <vector>
 #include <complex>
 #include <stdio.h>
-#include "netCDF_reading.h"
-#include "rarray_math.h"
+
 
 
 
