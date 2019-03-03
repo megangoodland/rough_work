@@ -8,7 +8,6 @@
 #include <cblas.h>
 
 #include "rarray_math.h"
-#include "netCDF_reading.h"
 //using namespace std;
 
 // Fast fourier transform function
