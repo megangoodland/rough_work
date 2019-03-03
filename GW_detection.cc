@@ -89,7 +89,7 @@ int main(){
   for (int i=0; i<f_size; i++) B[i] = Gk[i];
   cout << B[3] << endl;
   // double cblas_ddot(const int N, const double *X, const int incX, const double *Y, const int incY);
-  double x = cblas_ddot(f_size, A, 1, B, 1)
+  double x = cblas_ddot(f_size, A, 1, B, 1);
   cout << x << endl;
     
   
