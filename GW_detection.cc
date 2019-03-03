@@ -84,6 +84,7 @@ int main(){
   cout << Fk[3] << endl;
   
   double *A = new double[f_size]; // put in a way that cblas will work with
+  double *B = new double[f_size]; // put in a way that cblas will work with
   for (int i=0; i<f_size; i++) A[i] = Fk[i];
   for (int i=0; i<f_size; i++) B[i] = Gk[i];
   cout << B[3] << endl;
