@@ -2,17 +2,6 @@
 #ifndef netCDF_reading_h
 #define netCDF_reading_h
 
-#include <iostream>
-#include <rarray>
-#include <rarrayio>
-#include <vector>
-#include <complex>
-#include <stdio.h>
-#include <fftw3.h> // for fft stuff
-#include <cmath> // for pow
-#include <cblas.h>
-using namespace std;
-
 // fft: Fast fourier transform function for 1D complex double rarray
 //      Input: f rarray
 //      Output: fhat rarray
