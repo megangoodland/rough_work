@@ -7,7 +7,7 @@
 #include <rarrayio>
 #include <complex>
 
-using namespace std;
+//using namespace std;
 
 // fft: Fast fourier transform function for 1D complex double rarray
 //      Input: f rarray
