@@ -14,7 +14,6 @@
 #include <vector>
 #include <netcdf> // for file i/o
 #include <complex>
-#include "netCDF_reading.h"
 
 using namespace std;
 using namespace netCDF;
