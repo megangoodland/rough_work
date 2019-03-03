@@ -15,7 +15,7 @@
 
 #include <complex>
 
-using namespace std;
+//using namespace std;
 
 
 // get_f: This function reads f from the file and returns it in an rarray
